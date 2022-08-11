@@ -34,9 +34,17 @@ export default class StackList {
     return this[VALUE].push(...args)
   }
   pop() {
+    const handlers = this[HANDLERS]['pop']
+    handlers.forEach((item) => {
+      item.apply(this, args)
+    })
     return this[VALUE].pop()
   }
   clear() {
+    const handlers = this[HANDLERS]['clear']
+    handlers.forEach((item) => {
+      item.apply(this, args)
+    })
     this[VALUE].length = 0
   }
   size() {
